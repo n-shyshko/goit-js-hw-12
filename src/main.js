@@ -48,10 +48,10 @@ async function handleSearch (event) {
   }
        
   try {
-    const data = await getImages(qParams);
-    renderGallery(data.hits);
+    const images = await getImages(qParams);
+    renderGallery(images.hits);
 
-    if (data.hits.length === 0) {
+    if (images.hits.length === 0) {
       iziToast.error({
       message: 'Sorry, there are no images matching your search query. Please try again!',
       position: 'topRight',
@@ -62,7 +62,7 @@ async function handleSearch (event) {
   }
 
   qParams.maxPages = Math.ceil(
-    data.totalHits / qParams.perPage
+    images.totalHits / qParams.perPage
   );
 
     if (qParams.maxPages > 1) {
@@ -86,7 +86,7 @@ async function handleSearch (event) {
   }  
 }
     
-async function loadMoreHandler() {
+async function loadMoreHandler(event) {
   loadMore.hide();
   refs.loader.classList.remove('hidden');
 
