@@ -15,5 +15,4 @@ export async function getImages({searchText, page, perPage }) {
     })
   ).data;
   return response;
- 
 }
