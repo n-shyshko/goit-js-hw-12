@@ -16,7 +16,7 @@ const refs = {
   refs.searchForm.addEventListener("submit", handleSearch)
 
   const qParams = {
-    page: 1,
+    page: 0,
     perPage: 15,
     maxPages: 0,
     searchText: '',
@@ -44,7 +44,7 @@ async function handleSearch (event) {
     });
    
     event.currentTarget.reset();
-    return;
+    return;run
   }
        
   try {
@@ -87,13 +87,13 @@ async function handleSearch (event) {
 }
     
 async function loadMoreHandler(event) {
+  qParams.page += 1;
   loadMore.hide();
   refs.loader.classList.remove('hidden');
 
   try {
     const images = await getImages(qParams);
     renderGallery(images.hits);
-    qParams.page += 1;
   
   } catch (error) {
     iziToast.error({
